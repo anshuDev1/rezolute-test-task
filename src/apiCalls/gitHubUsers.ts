@@ -9,8 +9,9 @@ export const getUser = (userId: string) =>
       return res;
     })
     .catch((error: any) => {
+      console.log("error",error)
       if (error.response && error.response.data) {
-        const errorMsg = error.response.data.error;
+        const errorMsg = error.response.data.message;
         triggerNotifier({ type: "error", message: errorMsg });
       }
     });

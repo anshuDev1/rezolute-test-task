@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 import RCFconfig from "./config";
 axios.defaults.baseURL = RCFconfig.baseURL;
 
 export const setupAxiosInterceptors = () => {
 
-  const onResponseSuccess = (response) => response;
+  const onResponseSuccess = (response: any) => response;
 
-  const onResponseError = (err) => {
+  const onResponseError = (err: AxiosError) => {
     const status = err.status || (err.response ? err.response.status : 0);
     if (status === 401) {
 

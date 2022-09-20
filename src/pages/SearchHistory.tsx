@@ -10,8 +10,8 @@ export interface Props {
 
 export const SearchHistory = ({ searchHistory, setSearchHistory }: Props) => {
   return (
-    <>
-      <h3>History</h3>
+    <div className="mt-5">
+      <h3>HISTORY</h3>
       <TableMain>
         <tr>
           <TableHead>name</TableHead>
@@ -36,7 +36,7 @@ export const SearchHistory = ({ searchHistory, setSearchHistory }: Props) => {
           })
         }
       </TableMain>
-    </>
+    </div>
   )
 
 }

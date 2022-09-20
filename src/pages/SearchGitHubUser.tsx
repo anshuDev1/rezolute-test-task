@@ -5,6 +5,7 @@ import { UserDetail } from "../components/UserDetails";
 import { UserDetails } from "../types/user";
 import { Button, Input, StyledInput } from "../styles/searchStyle"
 import toast from "react-hot-toast";
+import moment from "moment";
 
 export interface Props {
   setSearchHistory: React.Dispatch<React.SetStateAction<UserDetails[]>>
@@ -40,7 +41,7 @@ export const SearchGitHubUser = (props: Props) => {
       toast.promise(myPromise, {
         loading: 'Loading',
         success: 'Got the data',
-        error: 'Error when fetching',
+        error: 'Faild to fetch..'
       });
     } else {
       toast.error("search string should not be empty!");
@@ -53,12 +54,12 @@ export const SearchGitHubUser = (props: Props) => {
   }, [id])
 
   return (
-    <>
-      <h3>Search GitHub User</h3>
+    <div className="mt-5">
+      <h3>SEARCH GITHUB USER</h3>
       <form onSubmit={(e) => {
         e.preventDefault()
         handleSearch(searchQuery)
-      }}>
+      }} className="mb-4">
         <StyledInput className={"inputWithIcon"}>
           <Input
             type="text"
@@ -66,12 +67,13 @@ export const SearchGitHubUser = (props: Props) => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
           />
+          <Button type="submit">Search</Button>
         </StyledInput>
-        <Button type="submit">Search</Button>
+
       </form>
       {user &&
         <UserDetail user={user} userRepo={userRepo} />
       }
-    </>
+    </div>
   )
 }
