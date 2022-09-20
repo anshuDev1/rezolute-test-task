@@ -1,5 +1,5 @@
 
-export interface userDetails {
+export interface UserDetails {
   login: string
   id?: number
   node_id: string
@@ -31,5 +31,6 @@ export interface userDetails {
   followers: number,
   following: number,
   created_at: string,
-  updated_at: string
+  updated_at: string,
+  date: string,
 }

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+// import React, { useState } from 'react';
 import './App.css';
-import { NavBar } from './components/navBar';
+import { NavBar } from './components/NavBar';
 import { setupAxiosInterceptors } from './services/axios';
 import { Toaster } from 'react-hot-toast';
 
 setupAxiosInterceptors();
 
 function App() {
-
-
   return (
     <div className="App">
       <Toaster
