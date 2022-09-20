@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getUser } from "../apiCalls/gitHubUsers";
+import { getUser, getUserRepos } from "../apiCalls/gitHubUsers";
 import { UserDetail } from "../components/userDetails";
 import { userDetails } from "../types/user";
 import styled from "styled-components";
+// import { triggerNotifier } from "../services/notifier";
+import toast from "react-hot-toast";
 
 export interface Props {
-  setSearchHistory: (searchHistory: (pre: string[]) => string[]) => void
+  setSearchHistory: React.Dispatch<React.SetStateAction<userDetails[]>>
 }
 
 export const SearchGitHubUser = (props: Props) => {
@@ -14,14 +16,25 @@ export const SearchGitHubUser = (props: Props) => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [user, setUser] = useState<userDetails>();
+  const [userRepo, setUserRepo] = useState();
 
   const { id } = useParams()
 
   const handleSearch = (searchQuery: string) => {
-    setSearchHistory((pre) => [...pre, searchQuery])
-    getUser(searchQuery).then(res => {
+
+    const myPromise = getUser(searchQuery).then(res => {
       setUser(res.data)
+      setSearchHistory((pre) => [...pre, res.data])
+      getUserRepos(searchQuery).then(result => {
+        setUserRepo(result.data)
+      })
     })
+
+    toast.promise(myPromise, {
+      loading: 'Loading',
+      success: 'Got the data',
+      error: 'Error when fetching',
+    });
   }
 
   useEffect(() => {
@@ -30,7 +43,7 @@ export const SearchGitHubUser = (props: Props) => {
 
   return (
     <>
-      <h1>SearchGitHubUser</h1>
+      <h3>Search GitHub User</h3>
       <form onSubmit={(e) => {
         e.preventDefault()
         handleSearch(searchQuery)
@@ -47,34 +60,47 @@ export const SearchGitHubUser = (props: Props) => {
         <Button type="submit">Search</Button>
       </form>
       {user &&
-        <UserDetail user={user} />
+        <UserDetail user={user} userRepo={userRepo} />
       }
+
+
+
+
+
+
+
     </>
   )
 
 }
 const Button = styled.button`
-  color: black;
+  color: #fff;
   font-size: 1em;
   margin: 1em;
   padding: 0.35em 1em;
   border: 2px solid gray;
   border-radius: 4px;
+  background-color: #4b6ef1;
 `;
 
 const Input = styled.input`
   height: 40px;
-  font-size: 25px;
+  font-size: 16px;
   width: 30%;
-  border: 2px solid #aaa;
-  border-radius: 4px;
+  border: 2px solid #4b6ef1;
+  border-radius: 8px;
   margin: 8px 0;
   outline: none;
-  padding: 8px;
+  padding: 8px 15px;
   box-sizing: border-box;
+  -webkit-transition: 0.3s;
   transition: 0.3s;
-  padding-left: 50px;
   cursor: pointer;
+  color: #4b6ef1;
+
+  &::placeholder {
+    color: #4b6ef1;
+  }
 
   &:focus {
     border-color: dodgerBlue;

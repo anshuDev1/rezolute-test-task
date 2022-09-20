@@ -1,45 +1,162 @@
 import { userDetails } from "../types/user"
+import styled from "styled-components";
+import { Col } from "react-awesome-styled-grid";
+import UserRepos from "./repoDetail";
 
-export const UserDetail = ({ user }: { user: userDetails | undefined }) => {
+const Container = styled.div`
+  width: 90%;
+  height: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-right: auto;
+  margin-left: auto;
+  --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0
+
+  @media(min-width: 1400px) {
+    max-width: 1320px;
+  }
+
+  @media(min-width: 1200px) {
+    max-width: 1140px;
+  }
+
+  @media(min-width: 992px) {
+    max-width: 960px;
+  }
+
+
+`;
+const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  height: 100%;
+`;
+
+const Col1 = styled.div`
+  flex: 0 0 auto;
+  width: 66.66%;
+  margin-bottom: 1.5rem;
+  @media(max-width: 991px) {
+    width:100%;
+  }
+`;
+
+const Col2 = styled.div`
+  flex: 0 0 auto;
+  width: 33.33%;
+  margin-bottom: 1.5rem;
+  @media(max-width: 991px) {
+    width:100%;
+    margin-bottom: 0;
+  }
+`;
+
+const Card = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #0000002d;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem
+`;
+
+const CardBody = styled.div`
+  flex: 1 1 auto;
+  padding: 1.5rem!important;
+`;
+
+const TextMuted = styled.div`
+  color: #6c757d;
+  margin-top: 0;
+  margin-bottom: 1rem;
+`;
+
+const CustomGradient = styled.div`
+  width: 33.33%;
+  text-align: center;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  img {
+    max-width: 100%;
+    height: auto;
+    width: 80px;
+    margin-top: 3rem!important;
+    margin-bottom: 3rem!important;
+  }
+  @media(max-width: 991px) {
+    width:100%;
+  }
+`;
+
+const CustomCol = styled.div`
+  width: 66.66%;
+  @media(max-width: 991px) {
+    width:100%;
+  }
+`;
+
+
+export const UserDetail = ({ user, userRepo }: { user: userDetails | undefined, userRepo: any }) => {
+  console.log("userRepo", userRepo)
   return (
-    <div className="container  h-100">
-      <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col col-lg-6 mb-4 mb-lg-0">
-          <div className="card mb-3" style={{ borderRadius: ".5rem" }}>
-            <div className="row g-0">
-              <div className="col-md-4 gradient-custom text-center"
-                style={{ borderTopLeftRadius: ".5rem", borderBottomLeftRadius: ".5rem" }}>
+    <Container className="container">
+      <Row className="row">
+        <Col1>
+          <Card>
+            <Row>
+              <CustomGradient>
                 <img src={user?.avatar_url}
-                  alt="Avatar" className="img-fluid my-5" style={{ width: "80px" }} />
+                  alt="Avatar" />
                 <div>
                   <h5>{user?.login}</h5>
                   <p>{user?.bio}</p>
-                  <a href={user?.bio}>Visit github profile!</a>
-                  <i className="far fa-edit mb-5"></i>
+                  <a href={user?.html_url} target="_blank">Visit github profile!</a>
                 </div>
-              </div>
+              </CustomGradient>
               <div className="col-md-8">
-                <div className="card-body p-4">
-
+                <CardBody>
                   <h6>Information</h6>
-                  {/* <hr className="mt-0 mb-4"> */}
-                  <div className="row pt-1">
-                    <div className="col-6 mb-3">
+                  <Row>
+                    <Col>
                       <h6>Public Repo</h6>
-                      <p className="text-muted">{user?.public_repos}</p>
-                    </div>
-                    <div className="col-6 mb-3">
+                      <TextMuted>{user?.public_repos}</TextMuted>
+                    </Col>
+                    <Col>
                       <h6>CreatedAt</h6>
-                      <p className="text-muted">{user?.created_at}</p>
-                    </div>
-                  </div>
-                 
-                </div>
+                      <TextMuted>{user?.created_at}</TextMuted>
+                    </Col>
+                  </Row>
+
+                </CardBody>
+                <CardBody>
+
+                  <h6>Repos</h6>
+                  {/* <hr className="mt-0 mb-4"> */}
+                  {/* {userRepo?.map((item: any) => {
+                    return (
+                      
+                      <p><a href={item.html_url} target="_blanck">{item.name}</a></p>
+                    )
+                  })} */}
+                </CardBody>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Row>
+          </Card>
+        </Col1>
+        <Col2>
+          <Card>
+            <UserRepos userRepo={userRepo} />
+          </Card>
+        </Col2>
+      </Row>
+    </Container>
   )
 }
