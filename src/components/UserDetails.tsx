@@ -1,5 +1,4 @@
-import { UserDetails } from "../types/user"
-// import { Col } from "react-awesome-styled-grid";
+import { UserDetails, UserReposDetail } from "../types/user"
 import UserRepos from "./RepoDetail";
 import {
   Container,
@@ -12,10 +11,11 @@ import {
   RepoHeading,
   ColInfo
 } from "../styles/userDetailStyle"
+import { CardSubtitle } from "../styles/repoDetailStyle";
 
 export const UserDetail = ({ user, userRepo }: {
   user: UserDetails | undefined,
-  userRepo: any
+  userRepo: UserReposDetail[]
 }) => {
 
   return (
@@ -33,7 +33,9 @@ export const UserDetail = ({ user, userRepo }: {
                 <div>
                   <h5>Username - <span>{user?.login}</span></h5>
                   <p>Bio - <span>{user?.bio}</span></p>
-                  <a href={user?.html_url} target="_blank" rel="noreferrer">Visit github profile!</a>
+                  <CardSubtitle>
+                    <a href={user?.html_url} target="_blank" rel="noreferrer">Visit github profile!</a>
+                  </CardSubtitle>
                 </div>
               </CustomGradient>
               <div className="col-md-8">

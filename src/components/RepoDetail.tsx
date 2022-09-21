@@ -1,13 +1,13 @@
 import { Col } from "react-awesome-styled-grid";
 import { MainDiv, Card, CardBody, CardTitle, CardSubtitle } from "../styles/repoDetailStyle"
+import { UserReposDetail } from "../types/user";
 
-const UserRepos = (props: any) => {
+const UserRepos = ({ userRepo }: { userRepo: UserReposDetail[] }) => {
 
-  const { userRepo } = props
   return (
     <MainDiv>
       {
-        userRepo?.length > 0 ? userRepo?.map((item: any, index: number) => {
+        userRepo?.length > 0 ? userRepo?.map((item: UserReposDetail, index: number) => {
           return (
             <Col md={4} key={index}>
               <Card>

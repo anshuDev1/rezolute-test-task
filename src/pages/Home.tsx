@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getUser, getUserRepos } from "../apiCalls/gitHubUsers";
 import { UserDetail } from "../components/UserDetails";
-import { UserDetails } from "../types/user";
+import { UserDetails, UserReposDetail } from "../types/user";
 import { Button, Input, StyledInput } from "../styles/searchStyle"
 import toast from "react-hot-toast";
-import moment from "moment";
+// import moment from "moment";
 
 export interface Props {
   setSearchHistory: React.Dispatch<React.SetStateAction<UserDetails[]>>
 }
 
-export const SearchGitHubUser = (props: Props) => {
+export const Home = (props: Props) => {
   const { setSearchHistory } = props
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [user, setUser] = useState<UserDetails>();
-  const [userRepo, setUserRepo] = useState();
+  const [userRepo, setUserRepo] = useState<UserReposDetail[]>([]);
 
-  const { id } = useParams()
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location?.state?.name) {
+      handleSearch(location.state.name);
+    }
+  }, [location?.state?.name])
 
   const handleSearch = (searchQuery: string) => {
     if (searchQuery !== "") {
@@ -49,10 +55,6 @@ export const SearchGitHubUser = (props: Props) => {
 
   }
 
-  useEffect(() => {
-    id && handleSearch(id)
-  }, [id])
-
   return (
     <div className="mt-5">
       <h3>SEARCH GITHUB USER</h3>
@@ -63,7 +65,7 @@ export const SearchGitHubUser = (props: Props) => {
         <StyledInput className={"inputWithIcon"}>
           <Input
             type="text"
-            value={id ? id : searchQuery}
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
           />

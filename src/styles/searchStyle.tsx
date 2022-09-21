@@ -7,14 +7,14 @@ export const Button = styled.button`
   padding: 0.35em 1em;
   border: 2px solid gray;
   border-radius: 4px;
-  background-color: #4b6ef1;
+  background-color:#00b1ff;
 `;
 
 export const Input = styled.input`
   height: 40px;
   font-size: 16px;
   width: 30%;
-  border: 2px solid #4b6ef1;
+  border: 2px solid #00b1ff;
   border-radius: 8px;
   margin: 8px 0;
   outline: none;
@@ -23,10 +23,10 @@ export const Input = styled.input`
   -webkit-transition: 0.3s;
   transition: 0.3s;
   cursor: pointer;
-  color: #4b6ef1;
+  color: #00b1ff;
 
   &::placeholder {
-    color: #4b6ef1;
+    color: #00b1ff;
   }
 
   &:focus {

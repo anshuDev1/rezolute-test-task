@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserDetails } from "../types/user";
 import { TableMain, TableHead, TableData, TextHover } from "../styles/historyStyle"
 
@@ -9,6 +9,8 @@ export interface Props {
 }
 
 export const SearchHistory = ({ searchHistory, setSearchHistory }: Props) => {
+
+  const navigate = useNavigate();
   return (
     <div className="mt-5">
       <h3>HISTORY</h3>
@@ -23,7 +25,12 @@ export const SearchHistory = ({ searchHistory, setSearchHistory }: Props) => {
             return (
               <tr key={index}>
                 <TableData>
-                  <Link to={`/${item.login}`}> <TextHover>{item.login}</TextHover></Link>
+                  {/* <Link to={`/${item.login}`}>  */}
+                  <div>
+                    <TextHover onClick={() => navigate('/',{state:{name:item.login}})}>{item.login}</TextHover>
+                  </div>
+
+                  {/* </Link> */}
                 </TableData>
                 <TableData>{item?.date}</TableData>
                 <TableData>

@@ -29,7 +29,7 @@ padding: 0px 8px;
 `;
 
 export const TextHover = styled.div`
-color: #0d6efd;
+color: #00b1ff;
 text-decoration: underline;
 cursor: pointer;
 

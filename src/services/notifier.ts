@@ -5,4 +5,5 @@ interface props {
   message: string
 }
 
-export const triggerNotifier = ({ type, message }: props) => toast[type](typeof (message) === "string" ? message : "Something went wrong!");
+export const triggerNotifier = ({ type, message }: props) =>
+  toast[type](typeof (message) === "string" ? message : "Something went wrong!");
