@@ -1,39 +1,35 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Used Technologies 
+- ReactJs: Frontend development
+- Typescript: For type checking
+- Styled Components: For creating Ui
 
-## Available Scripts
+# Setup Details 
+## System Requirements
 
-In the project directory, you can run:
+- NodeJs v14 or above
 
-### `npm start`
+## setup
+```
+> git clone https://github.com/anshuDev1/rezolute-test-task.git
+> cd rezolute-test-task
+> npm install
+> npm start
+```
 
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Implemented Feature
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-
-
-### Implemented Feature
-
-## Created two pages/routes
+### Created two pages/routes
 1. `/`
 - In Home page we have implement search feature
 - User can search git gub user 
 2. `/history`
 - Created table store search history with search time
-- User can `remove` the search resule and able to `research` through clicking on `searched key`
-##
+- User can `remove` the search result and able to `research` clicking on `searched key`
+
+### Other Details
 
 1. Used React/Hooks
 - used `useLocation` `useEffect` `useState` `useNavigator`
